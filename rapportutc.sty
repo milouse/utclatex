@@ -1,0 +1,201 @@
+\ProvidesPackage{rapportutc}
+\RequirePackage{articleutc}
+
+%%%%%%% Définition des entetes et pieds de page %%%%%%%%%%
+
+\fancyhf{}               %initialise tous les champs dans head et foot
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\thechapter.\ #1}{}}
+\fancyheadoffset[L]{1cm}
+\fancyfootoffset[L]{1cm}
+\renewcommand{\headrulewidth}{0pt}% met la largeur du trait à 0.2pt
+\renewcommand{\footrulewidth}{4pt}%
+\renewcommand{\footrule}{%
+  {\color{jauneutc}%
+    \hrule width\headwidth height\footrulewidth \vskip+\footrulewidth}
+}
+\fancyhead[L]{\footnotesize{\textit{\@title}}}%
+\fancyhead[R]{\footnotesize{\nouppercase{\leftmark}}}%
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{%
+	\vspace*{-0.1in}%
+	\logoutc{height=0.75cm}%
+}
+\fancyfoot[L]{\footnotesize{\textit{\@author\\ \@uv}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Petites fonctions en plus
+% Suiveur UTC
+\def\@suiveurutc{Non renseigné~!}
+\def\suiveurutc#1{\def\@suiveurutc{#1}}
+% Suiveur entreprise
+\def\@suiveurets{Non renseigné~!}
+\def\suiveurets#1{\def\@suiveurets{#1}}
+% Nom de l'entreprise
+\def\@entreprise{Non renseigné~!}
+\def\entreprise#1{\def\@entreprise{#1}}
+% Logo de l'entreprise
+\def\@logoets{~}
+\def\logoets#1{\def\@logoets{#1}}
+% Lieu du stage
+\def\@lieustage{Non renseigné~!}
+\def\lieustage#1{\def\@lieustage{#1}}
+
+% Création de la page de titre
+\newcommand{\pagedetitre}{
+  \thispagestyle{empty}
+  \begin{titlepage} %%% page de titre
+    \begin{center}
+      \logoutctext
+      \vfill
+      \rule{\linewidth}{0.8mm}\vspace{3mm}\\
+      \setlength{\baselineskip}{1.5\baselineskip}
+      \Huge \@title\\
+      \setlength{\baselineskip}{0.67\baselineskip}
+      {\rule{\linewidth}{0.8mm}}
+      \vspace{3mm}\\
+      \large \textit{\@author}
+      \vfill
+      \normalsize{---~\@semestre~---}
+    \end{center}
+  \end{titlepage}
+}
+
+\newcommand{\groovypdtitre}{
+  \thispagestyle{empty}
+  \begin{titlepage} %%% page de titre
+    \logoutc{height=17mm}
+    \hfill
+    \begin{tabular}[b]{l}
+      \textbf{\@branche}\\
+      \textbf{\@filiere}\\
+      \textbf{\@specialite}
+    \end{tabular}
+
+    \vspace{1cm}
+
+    \begin{center}
+      \vspace{4cm}
+      {\color{jauneutc}\rule{\linewidth}{0.8mm}}\vspace{3mm}\\
+      \setlength{\baselineskip}{1.5\baselineskip}
+      \Huge \textsc{\@title}\\
+      \setlength{\baselineskip}{0.67\baselineskip}
+      {\color{jauneutc}\rule{\linewidth}{0.8mm}}
+      \vfill
+    \end{center}
+
+    \hfill
+    \begin{tabular}[b]{l}
+      UV~: \textbf{\@uv}\\
+      Semestre~: \textbf{\@semestre}
+    \end{tabular}
+  \end{titlepage}
+}
+
+\newcommand{\stagepdtitre}{
+  \thispagestyle{empty}
+  \begin{titlepage} %%% page de titre
+    \logoutc{height=17mm}
+    \hfill
+    \begin{tabular}[b]{l}
+      \textbf{\@branche}\\
+      \textbf{\@filiere}\\
+      \textbf{\@specialite}
+    \end{tabular}
+
+    \vspace{1cm}
+
+    \begin{tabular}{l}
+      Étudiant~: \textbf{\@author}\\
+      Suiveur UTC~: \textbf{\@suiveurutc}\\
+      Semestre~: \textbf{\@semestre}
+    \end{tabular}
+
+    \begin{center}
+      \vspace{4cm}
+      {\color{jauneutc}\rule{\linewidth}{0.8mm}}\vspace{3mm}\\
+      \setlength{\baselineskip}{1.5\baselineskip}
+      \Huge \textsc{\@title}\\
+      \setlength{\baselineskip}{0.67\baselineskip}
+      {\color{jauneutc}\rule{\linewidth}{0.8mm}}
+      \vfill
+    \end{center}
+
+    \@logoets
+    \hfill
+    \begin{tabular}[b]{l}
+      Entreprise~: \textbf{\@entreprise}\\
+      Lieu~: \textbf{\@lieustage}\\
+      Responsable~: \textbf{\@suiveurets}
+    \end{tabular}
+  \end{titlepage}
+}
+
+\makeatletter
+\def\@part[#1]#2#3{
+  \ifnum \c@secnumdepth >-2\relax \refstepcounter{part}
+  \addcontentsline{toc}{part}{\thepart \hspace{1em} #1}
+  \else
+  \addcontentsline {toc}{part}{#1}
+  \fi
+  \markboth {}{}{
+    \centering \vfill
+    \interlinepenalty \@M \normalfont
+    \ifnum \c@secnumdepth >-2\relax
+    \textcolor{charcoal}{\Huge\bfseries \partname ~\thepart}
+    \par \vskip 20\p@
+    \fi
+    \textcolor{tatoebagreen}{\Huge \bfseries #2}
+    \par
+  }
+  {
+    \centering
+    \vfill #3 \vfill
+  }
+  \@endpart}
+
+\def\@makechapterhead#1{
+  \vspace*{50\p@}
+  {
+    \parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \Huge\bfseries \thechapter.~
+    \fi
+    \textcolor{charcoal}{\Huge\bfseries #1}
+    \par\nobreak
+    \vskip 40\p@
+  }
+}
+
+\def\@makeschapterhead#1{
+  \vspace*{50\p@}
+  {
+    \parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \textcolor{charcoal}{\Huge \bfseries  #1}
+    \par\nobreak
+    \vskip 40\p@
+  }
+}
+
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+  \thispagestyle{fancy}%
+  \global\@topnum\z@
+  \@afterindentfalse
+  \secdef\@chapter\@schapter}
+
+\renewcommand\section{\@startsection {section}{1}{-1cm}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\normalfont\Large\bfseries\color{charcoal!60}}%
+}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\color{charcoal!60}}%
+}
+\makeatother

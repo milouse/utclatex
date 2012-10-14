@@ -1,0 +1,174 @@
+\ProvidesPackage{edeparisarticle}
+
+% pour les polices accentuées francaises (avec pdfTeX)
+% décommenter pour pdflatex, commenter pour xelatex
+%\RequirePackage[utf8]{inputenc}
+%\RequirePackage[T1]{fontenc}
+
+%font (commenter pour pdflatex, décommenter pour xelatex)
+% Il semblerait que xltxtra et xunicode soient dépréciés... Je les
+% garde en cas d'incompatibilités majeures...
+%\RequirePackage{xltxtra}
+%\RequirePackage{xunicode}
+\RequirePackage{fontspec}
+%\defaultfontfeatures{Scale=MatchLowercase}
+%\setromanfont[Mapping=tex-text]{DejaVuSerif}
+%\setsansfont[Mapping=tex-text]{DejaVuSans}
+\defaultfontfeatures{Scale=MatchLowercase}
+\setmonofont[Mapping=tex-text,Scale=0.8, Numbers=SlashedZero]{DejaVuSansMono}
+\setromanfont[Mapping=tex-text, Numbers=Proportional, Numbers=OldStyle]{Linux Libertine O}
+\setsansfont[Mapping=tex-text, Numbers=Monospaced]{Linux Biolinum O}
+
+\RequirePackage{geometry}
+% pour l'impression taille A4
+\geometry{
+	%a4paper, % définit dans l'entête du fichier
+	top=2.5cm,
+	bottom=2cm,
+	left=3cm,
+	right=2cm,
+	asymmetric,
+	marginparwidth=1.2cm
+}
+\newlength{\decallagetitre}
+\setlength{\decallagetitre}{1cm}
+% pour l'affichage en e-reader
+%\geometry{
+%	paperwidth=80mm,
+%	paperheight=104mm,
+%	top=3mm,
+%	bottom=3mm,
+%	includeheadfoot,
+%	asymmetric,
+%	left=1cm,
+%	right=3mm,
+%	marginparwidth=1.2cm
+%}
+%\newlength{\decallagetitre}
+%\setlength{\decallagetitre}{5mm}
+%\headheight 20.6pt % en cas de titre long
+% pour les nouvelles commandes (espace à la fin)
+\RequirePackage{xspace}
+%Selection de la langue du document
+\RequirePackage[english,frenchb]{babel}
+\RequirePackage[babel,english=american,french=guillemets*]{csquotes}
+\MakeOuterQuote{"}
+\linespread{1.4}
+\frenchspacing
+\widowpenalty=300
+\clubpenalty=300
+% pour avoir des couleurs
+%\RequirePackage[usenames,dvipsnames]{color}
+\RequirePackage[table,usenames,dvipsnames]{xcolor}
+\definecolor{orange}{RGB}{250,108,0}
+\definecolor{darkgreen}{RGB}{155,187,89}
+\definecolor{lightgreen}{RGB}{239,243,234}
+\definecolor{atosred}{RGB}{204,0,0}
+\definecolor{tatoebagreen}{RGB}{100,155,61}
+\definecolor{charcoal}{RGB}{28,28,28}
+\definecolor{jauneutc}{RGB}{255,217,17}
+\definecolor{grayutc}{RGB}{117,115,120}
+\definecolor{boxcodecolor}{RGB}{250,241,212}
+\definecolor{fboxcodecolor}{RGB}{183,146,20}
+\definecolor{boxdefcolor}{RGB}{229,235,242}
+\definecolor{fboxdefcolor}{RGB}{52,77,108}
+\definecolor{fboxatoscolor}{RGB}{255,133,133}
+\definecolor{thalestitle}{RGB}{50,50,101}
+\definecolor{thalessubtitle}{RGB}{57,138,199}
+\definecolor{thalesorange}{RGB}{255,115,0}
+\definecolor{thalesgreen}{RGB}{152,191,12}
+
+% configuration de la transformation en PDF
+\RequirePackage{hyperref}
+\hypersetup{
+  colorlinks=false,
+  pdfborder={0 0 0 0},
+  breaklinks=true,
+  bookmarks=true,
+  bookmarksopen=true,
+  pdfcreator={LaTeX},
+  pdfproducer={LaTeX with package RapportUTC}
+}
+% pour gérer l'insertion de figures
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+% pour pouvoir inserer des url en bleu sans serif
+\RequirePackage{url}
+\urlstyle{sf}
+% Pour différents types de tableaux
+\RequirePackage{multirow}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{colortbl}
+\RequirePackage{ltxtable}
+\RequirePackage{subfigure}
+\RequirePackage{wrapfig}
+% pour les entetes et pieds de page
+\RequirePackage{fancyhdr}
+\RequirePackage{lettrine}
+% Pour des jolis codes sources
+\RequirePackage[final]{listings}
+\RequirePackage{eurosym}
+\RequirePackage{acronym}
+\RequirePackage{pifont} % Dingbats font (useful for custom itemize)
+\RequirePackage{natbib}
+
+%%%%%%%Définition des entetes et pieds de page%%%%%%%%%%
+
+% Choix de la licence du document. Par défaut CC by sa
+\def\@licencechoice{\includegraphics[width=1.1cm]{bysafr.png}~}
+\def\licencechoice#1{\def\@licencechoice{#1}}
+
+\pagestyle{fancy}
+\fancyhf{}               %initialise tous les champs dans head et foot
+\renewcommand{\headrulewidth}{0pt}% met la largeur du trait à 0.2pt
+\renewcommand{\footrulewidth}{0pt}%
+
+\fancyhead[RO,LE]{\footnotesize{\textit{\@title}}}
+\fancyfoot[RE,LO]{\footnotesize{\textit{\@author}}}
+\fancyfoot[RO,LE]{\footnotesize{\textit{\@licencechoice}}}
+\fancyheadoffset[L]{\decallagetitre}
+\fancyfootoffset[L]{\decallagetitre}
+\fancyfoot[C]{\thepage}
+
+%%%%%%% Mes commandes %%%%%%%%
+\newcommand\urlcolor[1]{\textcolor{thalessubtitle}{\url{#1}}}
+\newcommand{\Num}[1]{\oldstylenums{#1}}
+\newcommand{\cf}[1]{(\emph{cf.} section \ref{#1}, \og\nameref{#1}\fg, %
+  p. \pageref{#1})}
+\newcommand{\cfnop}[1]{\emph{cf.} section \ref{#1}, \og\nameref{#1}\fg, %
+  p. \pageref{#1}}
+\newcommand{\cfnocf}[1]{(section \ref{#1}, \og\nameref{#1}\fg, %
+  p. \pageref{#1})}
+\newcommand{\cfnopnocf}[1]{section \ref{#1}, \og\nameref{#1}\fg, %
+  p. \pageref{#1}}
+\newcommand{\aster}{\ding{93}}
+\newcommand\asterism{
+  \begin{center}
+    \vspace{-1em}
+    \parbox{1in}{ % needed to prevent split across page boundaries
+      \begin{center}
+        \aster\\
+        \aster\hspace{1.15em}\aster
+      \end{center}
+    } %\parbox
+    \vspace{-0.75em}
+  \end{center}
+}
+
+\renewcommand\section{\@startsection {section}{1}{-1\decallagetitre}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+
+% \renewcommand{\acsfont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
+% \renewcommand{\acffont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
+% \renewcommand{\acfsfont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}

@@ -1,0 +1,103 @@
+\ProvidesPackage{articleutc}
+\RequirePackage{edeparisarticle}
+
+\RequirePackage{framed}
+\newenvironment{codebox}{%
+  \def\FrameCommand{%
+    \fboxsep=\FrameSep \fcolorbox{fboxcodecolor}{boxcodecolor}%
+  }%
+  \MakeFramed{\FrameRestore}%
+}%
+{\endMakeFramed}
+
+\newenvironment{defbox}{%
+  \def\FrameCommand{%
+    \fboxsep=\FrameSep \fcolorbox{fboxdefcolor}{boxdefcolor}%
+  }%
+  \MakeFramed{\FrameRestore}%
+  \noindent\ignorespaces
+}%
+{\endMakeFramed}
+
+\newenvironment{atosbox}{%
+  \def\FrameCommand{%
+    \fboxsep=\FrameSep \fcolorbox{atosred}{fboxatoscolor}%
+  }%
+  \MakeFramed{\FrameRestore}%
+}%
+{\endMakeFramed}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Définitions des variables et des macros pour les modifier pour la
+% page de titre. dans le texte, utiliser \wxxx pour ecrire xxx dans
+% le document
+% UV concernée
+\def\@uv{Non renseigné~!}
+\def\uv#1{\def\@uv{#1}}
+% Semestre concernée
+\def\@semestre{Non renseigné~!}
+\def\semestre#1{\def\@semestre{#1}}
+% Branche concernée
+\def\@branche{Non renseigné~!}
+\def\branche#1{\def\@branche{#1}}
+% Filière ou master, ou spécialité concernée
+\def\@filiere{~}
+\def\filiere#1{\def\@filiere{#1}}
+% Filière ou master, ou spécialité concernée, deuxième ligne
+\def\@specialite{~}
+\def\specialite#1{\def\@specialite{#1}}
+% Logo de l'utc
+\newcommand{\logoutc}[1]{\includegraphics[#1]{utc.png}}
+\newcommand{\logoutctext}{
+  \textsc{\large Université de Technologie de Compiègne}
+}
+
+\newcommand{\cita}[1]{\og\emph{#1}\fg}
+
+\newcommand{\bcode}[1]{
+  \begin{codebox}
+    \textcolor{fboxcodecolor}{\texttt{#1}}
+  \end{codebox}
+}
+\newcommand{\bdef}[1]{
+  \begin{defbox}
+    \textcolor{fboxdefcolor}{\textit{#1}}
+  \end{defbox}
+}
+\newcommand{\onto}[1]{%
+	\fcolorbox{fboxcodecolor}{boxcodecolor}{#1}
+}
+
+%%%%%%%Définition des entetes et pieds de page%%%%%%%%%%
+
+\renewcommand{\footrulewidth}{4pt}%
+\renewcommand{\footrule}{%
+  {\color{jauneutc}%
+    \hrule width\headwidth height\footrulewidth \vskip+\footrulewidth}
+}
+\fancyhf{}               %initialise tous les champs dans head et foot
+\fancyhead[L]{\logoutc{height=0.75cm}}
+\fancyhead[R]{}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\footnotesize{\textit{\@title}}}
+\fancyfoot[L]{\footnotesize{\textit{\@author\\ \@uv}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Création de la page de titre
+
+\newcommand{\titrearticle}{
+  \begin{center}
+    \vfill
+    \Huge \@title \\
+    \vspace{1cm}
+    \large \textit{\@author}\\
+    \large{\@date}\\
+    \normalsize{\@uv~---~\@semestre}
+    \vspace{1cm}
+  \end{center}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
