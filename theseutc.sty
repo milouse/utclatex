@@ -1,0 +1,216 @@
+\ProvidesPackage{rapportutc}
+\RequirePackage{articleutc}
+
+%% L'ensemble de ce paquet est inspiré des travaux de Julien Chiquet
+%% http://stat.genopole.cnrs.fr/members/jchiquet/welcome
+
+%% Biblio
+\RequirePackage{natbib}
+\bibliographystyle{plainnat}
+
+%%%%%%% Définition des entetes et pieds de page %%%%%%%%%%
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[RO,LE]{\textbf{\thepage}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{main}{
+  \fancyhf{}
+  \fancyhead[RO]{\nouppercase{\rightmark}}
+  \fancyhead[LE]{\nouppercase{\leftmark}}
+  \fancyfoot[RO,LE]{\textbf{\thepage}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand{\beforepreface}{
+  \frontmatter
+  \pagestyle{empty}
+  \titlepage
+  \pagestyle{plain}
+  ~\newpage
+  \cleardoublepage
+  \dedicacepage
+}
+
+\newcommand{\afterpreface}{
+  \mainmatter
+  \pagestyle{main}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Petites fonctions en plus
+% S'agit-il de l'envoi aux rapporteur ou de la version finale ?
+\newif\ifdefinitif\definitiftrue
+\newif\ifhighfive\highfivetrue
+
+% Titre français
+\def\@titleFR{Non renseigné~!}
+\def\titleFR#1{\def\@titleFR{#1}}
+% Titre anglais
+\def\@titleEN{~}
+\def\titleEN#1{\def\@titleEN{#1}}
+% Abstract français / anglais
+\def\@abstractFR{Non renseigné~!}
+\def\abstractFR#1{\def\@abstractFR{#1}}
+\def\@abstractEN{~}
+\def\abstractEN#1{\def\@abstractEN{#1}}
+% Les mots clés également en fr/en
+\def\@keywordsFR{Non renseignés~!}
+\def\keywordsFR#1{\def\@keywordsFR{#1}}
+\def\@keywordsEN{~}
+\def\keywordsEN#1{\def\@keywordsEN{#1}}
+% Laboratoire de rattachement
+\def\@laboratoire{Non renseigné~!}
+\def\laboratoire#1{\def\@laboratoire{#1}}
+% Dates diverses
+\def\@datesoumission{Non renseignée~!}
+\def\datesoumission#1{\def\@datesoumission{#1}}
+\def\@datesoutenance{Non renseignée~!}
+\def\datesoutenance#1{\def\@datesoutenance{#1}}
+% Composition du jury
+\def\@jury{Non renseigné~!}
+\def\jury#1{\def\@jury{#1}}
+% Petite dédicace
+\def\@dedicace{~}
+\def\dedicace#1{\def\@dedicace{#1}}
+
+
+% Création de la page de titre
+\renewcommand{\titlepage}{%
+  \thispagestyle{empty}
+  \begin{center}
+    \ifdefinitif %% Définitif, version envoyée à l'imprimerie
+    \Large\textsc{Université de Technologie de Compiègne}\\
+    \textsc{\@laboratoire}\\ \bigskip
+    \huge\textsc{Thèse}\\ \bigskip
+    \large En vue de l'obtention du titre de Docteur\\
+    Spécialité \og \@specialite \fg\\ \bigskip
+    présentée par\\ \bigskip
+    \@author
+
+    \vfill
+    \Huge~\textsc{\@titleFR}
+    \vfill
+
+    \normalsize
+    \begin{flushleft}
+      Thèse soutenue le \@datesoutenance{} devant le jury composé de :\\
+    \end{flushleft}
+    \vspace{1cm}
+    \@jury
+
+    \else %% Non définitif, envoyé pour relecture
+    \vskip3cm
+    \vfill
+    \large
+    Rapport soumis aux rapporteurs, afin de sanctionner le
+    dossier pour l'obtention du titre de Docteur de\\
+    l'Université de Technologie de Compiègne\\
+    Spécialité \og \@specialite \fg
+    \vskip3cm
+    \huge {\sc \@titleFR }\\ \vskip2cm
+    \large \@author, le \@datesoumission \\
+    \vskip6cm
+    \vfill
+    \textsc{Mots-clés :} \@keywordsFR
+    \fi
+  \end{center}
+  \cleardoublepage
+}
+
+% ===========================================================
+% PAGE DE DEDICACE
+\newcommand{\dedicacepage}{%
+  \ifhighfive
+  \begin{flushright}
+    \large\em\null\vskip1in\@dedicace\vfill
+  \end{flushright}
+  \cleardoublepage
+  \fi
+}
+
+\newcommand{\abstractpage}{%
+  \pagestyle{empty}
+  ~\newpage
+  \par
+  \vfill
+  \paragraph*{Titre}\@titleFR
+  \paragraph*{Résumé}\@abstractFR
+  \paragraph*{Mots-clés}\@keywordsFR
+  \paragraph*{Title}\@titleEN
+  \paragraph*{Abstract}\@abstractEN
+  \paragraph*{Keywords}\@keywordsEN
+}
+
+\makeatletter
+%\def\@part[#1]#2#3{
+%  \ifnum \c@secnumdepth >-2\relax \refstepcounter{part}
+%  \addcontentsline{toc}{part}{\thepart \hspace{1em} #1}
+%  \else
+%  \addcontentsline{toc}{part}{#1}
+%  \fi
+%  \markboth {}{}{
+%    \centering \vfill
+%    \interlinepenalty \@M \normalfont
+%    \ifnum \c@secnumdepth >-2\relax
+%    \textcolor{charcoal}{\Huge\bfseries \partname ~\thepart}
+%    \par \vskip 20\p@
+%    \fi
+%    \textcolor{tatoebagreen}{\Huge \bfseries #2}
+%    \par
+%  }
+%  {
+%    \centering
+%    \vfill #3 \vfill
+%  }
+%  \@endpart}
+
+\def\@makechapterhead#1{
+  \vspace*{50\p@}
+  {
+    \parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \Huge\bfseries \thechapter.~
+    \fi
+    \textcolor{charcoal}{\Huge\bfseries #1}
+    \par\nobreak
+    \vskip 40\p@
+  }
+}
+
+\def\@makeschapterhead#1{
+  \vspace*{50\p@}
+  {
+    \parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \textcolor{charcoal}{\Huge \bfseries  #1}
+    \par\nobreak
+    \vskip 40\p@
+  }
+}
+
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+  \thispagestyle{fancy}%
+  \global\@topnum\z@
+  \@afterindentfalse
+  \secdef\@chapter\@schapter}
+
+\renewcommand\section{\@startsection {section}{1}{-1cm}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\normalfont\Large\bfseries\color{charcoal!60}}%
+}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\color{charcoal!60}}%
+}
+\makeatother
