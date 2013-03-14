@@ -41,6 +41,13 @@
   \pagestyle{main}
 }
 
+\newcommand{\annexes}{
+  \backmatter
+  \pagenumbering{roman}
+  %\setcounter{page}{0}
+  \pagestyle{plain}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macros
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -147,6 +154,14 @@
   \paragraph*{Title}\@titleEN
   \paragraph*{Abstract}\@abstractEN
   \paragraph*{Keywords}\@keywordsEN
+}
+
+\newcommand{\colophon}[1]{
+  ~\vfill
+  \begin{center}
+    \small #1
+  \end{center}
+  \cleardoublepage
 }
 
 \makeatletter
