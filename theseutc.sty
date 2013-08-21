@@ -42,9 +42,10 @@
 }
 
 \newcommand{\annexes}{
-  \backmatter
+  \cleardoublepage
+  \appendix
   \pagenumbering{roman}
-  %\setcounter{page}{0}
+  % \setcounter{page}{0}
   \pagestyle{plain}
 }
 
@@ -157,44 +158,45 @@
 }
 
 \newcommand{\chapeau}[2]{
-  \begin{flushright}
-    \textcolor{charcoal!50}{%
-      \og \emph{#1} \fg\\%
-      \small --- #2%
-    }
-  \end{flushright}
+  ~\hfill
+  \parbox{.6\textwidth}{
+    \begin{flushright}
+      \textcolor{charcoal!50}{%
+        \og \emph{#1} \fg\\%
+        \small --- #2%
+      }
+    \end{flushright}}
 }
 
+\RequirePackage{datetime} % no native solution ? :-(
 \newcommand{\colophon}[1]{
   ~\vfill
   \begin{center}
-    \small #1
+    \small #1\\
+    \scriptsize version du \today{} --- \currenttime
   \end{center}
   \cleardoublepage
 }
 
 \makeatletter
-%\def\@part[#1]#2#3{
-%  \ifnum \c@secnumdepth >-2\relax \refstepcounter{part}
-%  \addcontentsline{toc}{part}{\thepart \hspace{1em} #1}
-%  \else
-%  \addcontentsline{toc}{part}{#1}
-%  \fi
-%  \markboth {}{}{
-%    \centering \vfill
-%    \interlinepenalty \@M \normalfont
-%    \ifnum \c@secnumdepth >-2\relax
-%    \textcolor{charcoal}{\Huge\bfseries \partname ~\thepart}
-%    \par \vskip 20\p@
-%    \fi
-%    \textcolor{tatoebagreen}{\Huge \bfseries #2}
-%    \par
-%  }
-%  {
-%    \centering
-%    \vfill #3 \vfill
-%  }
-%  \@endpart}
+\def\@part[#1]#2#3{
+  \ifnum \c@secnumdepth >-2\relax \refstepcounter{part}
+  \addcontentsline{toc}{part}{\thepart \hspace{1em} #1}
+  \else
+  \addcontentsline{toc}{part}{#1}
+  \fi
+  \markboth {}{}{
+    \centering \vfill
+    \interlinepenalty \@M \normalfont
+    \ifnum \c@secnumdepth >-2\relax
+    \textcolor{charcoal!70}{\Huge\bfseries \partname ~\thepart}
+    \par \vskip 20\p@
+    \fi
+    \textcolor{charcoal}{\Huge \bfseries #2}
+    \par
+  }
+  {\vspace{2cm} #3 \vfill}
+  \@endpart}
 
 \def\@makechapterhead#1{
   \vspace*{50\p@}
@@ -239,4 +241,5 @@
 }
 \makeatother
 
-\setlength{\parskip}{1.8ex plus 0.2ex minus 0.5ex}
+\linespread{1.3}
+\setlength{\parskip}{1.5ex plus 0.2ex minus 0.5ex}
