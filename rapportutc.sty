@@ -14,8 +14,8 @@
   {\color{jauneutc}%
     \hrule width\headwidth height\footrulewidth \vskip+\footrulewidth}
 }
-\fancyhead[L]{\footnotesize{\textit{\@title}}}%
-\fancyhead[R]{\footnotesize{\nouppercase{\leftmark}}}%
+\fancyhead[LE]{\footnotesize{\textit{\@title}}}%
+\fancyhead[RO]{\footnotesize{\nouppercase{\leftmark}}}%
 \fancyfoot[C]{\thepage}
 \fancyfoot[R]{%
   \vspace*{-0.1in}%
@@ -151,10 +151,7 @@
     \textcolor{tatoebagreen}{\Huge \bfseries #2}
     \par
   }
-  {
-    \centering
-    \vfill #3 \vfill
-  }
+  {\vspace{2cm} #3 \vfill}
   \@endpart}
 
 \def\@makechapterhead#1{
