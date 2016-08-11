@@ -1,6 +1,9 @@
 UTC LaTex package
 =================
 
+Supports de documents
+---------------------
+
 Vous trouverez sur ce site différentes ressources afférentes à la
 conception de différents template latex pour
 l'[Université de Technologie de Compgiègne](https://www.utc.fr/).
@@ -33,6 +36,24 @@ comment revenir à latex ou pdflatex.
 [2]: https://fr.wikipedia.org/wiki/XeTeX
 [3]: https://projects.depar.is/utclatex/wiki?name=Usage
 
+Support de présentation
+-----------------------
+
+Cela fait un moment que cela trainaît dans mes cartons, vous aurez
+désormais la joie de découvrir également un thème beamer vous permettant
+de réaliser des présentations aux couleurs de l'UTC.
+
+- De nombreuses options sont disponibles, voir le fichier source
+  `slide.tex` pour les découvrir
+- En particulier le thème supporte deux logos institutionnel différent :
+  le logo classique et le logo pour la recherche
+- Le thème supporte également deux variantes de couleurs : la jaune
+  classique et des nuances de roses pour se rapprocher des besoins des
+  affaires internationnales.
+
+License
+-------
+
 Tous les fichiers sources (à l'exception notable des images qui restent
 la propriété exclusive de leurs auteurs) sont disponibles selon les
 termes de la [WTF Public License](http://www.wtfpl.net/).
@@ -40,7 +61,4 @@ termes de la [WTF Public License](http://www.wtfpl.net/).
 Télécharger
 -----------
 
-Dernières versions disponibles :
-
-- [latex-article-utc.zip](https://projects.depar.is/utclatex/doc/tip/latex-article-utc.zip)
-- [latex-rapport-utc.zip](https://projects.depar.is/utclatex/doc/tip/latex-rapport-utc.zip)
+[Dernière version disponible](https://projects.depar.is/utclatex/tarball/utc_latex.tgz?uuid=tip)

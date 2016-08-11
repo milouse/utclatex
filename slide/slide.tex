@@ -1,0 +1,110 @@
+\documentclass{beamer}
+
+\usepackage{beamerutc}
+
+\usetheme{utc}
+%\usetheme[shadowed=true]{utc}
+%\usetheme[rounded=false]{utc}
+% Option utcrecherche pour les thèses, les présentations d'articles…
+% \usetheme[utcrecherche=true]{utc}
+% Option pinkie pour les relations internationales
+% \usetheme[pinkie=true]{utc}
+%\usetheme[navigation=true,rounded=false]{utc}
+%\usetheme[navigation=vertical,rounded=false]{utc}
+%\usetheme[withsecplan=true,navigation=vertical,rounded=false]{utc}
+% You cannot have rounded=false and shadowed=true in the same time.
+% \usetheme[navigation=false, option=withsecplan]{utc}
+
+% default is equivalent to the following
+%\usetheme[withsecplan=false,navigation=false,rounded=true,shadowed=false,utcrecherche=false]{utc}
+
+\title{Essai de presentation}
+%\subtitle{Test de sous titre}
+\author{Étienne Deparis}
+\email{etienne@depar.is}
+%\institute{Présentation R\&D}
+\date{16 juillet 2010}
+\uv{XX42}
+\semestre{P10}
+
+\begin{document}
+
+\frame[plain]{\utctitlepage}
+
+\section{Qu'est-ce que la vie ?}
+
+\begin{frame}{Pourquoi le ciel ?}
+  \begin{itemize}
+  \item \textsc{Beamer}, c'est vachement tout beau!
+  \item avec de nombreux atouts partout
+  \item et même là où on ne les attends pas !
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  Et c'est facile.
+\end{frame}
+
+\section{Le contenu de ma prez}
+\subsection{C'est du gâteau}
+\begin{frame}{C'est du gâteau}
+  \begin{itemize}
+	\hilite<1>\item Cro bien
+	\hilite<2>\item yep yep !
+  \end{itemize}
+\end{frame}
+
+\subsection{Les blocs prédéfinis}
+\begin{frame}{Les blocs prédéfinis}
+  % Un bloc normal pour comparer
+  \begin{block}{Un bloc normal}
+    Texte du block normal
+  \end{block}
+
+  % Un bloc "example"
+  \begin{exampleblock}{Un bloc example}
+    Exemple de block example
+  \end{exampleblock}
+
+  % Un bloc "alert"
+  \begin{alertblock}{Un bloc alert}
+    Texte du block alerte
+  \end{alertblock}
+
+\end{frame}
+
+\begin{frame}{Les blocs prédéfinis}
+  \begin{definition}
+    environnement definition
+  \end{definition}
+
+  \begin{example}
+    environnement example
+  \end{example}
+
+  \begin{proof}
+    environnement proof
+  \end{proof}
+
+  \begin{theorem}
+    environnement theorem
+  \end{theorem}
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}{Conclusion}
+  \begin{block}{}
+    C'est top!
+  \end{block}
+\end{frame}
+
+\frame[plain]{\utcthankspage[Merci !]}
+% \frame[plain]{\utcthankspage} % Default print Thanks
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

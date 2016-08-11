@@ -1,0 +1,31 @@
+\def\beamer@themeinner@true{true}
+\def\beamer@themeinner@false{false}
+\def\beamer@themeinner@rounded{true}
+\def\beamer@themeinner@shadowed{false}
+
+\DeclareOptionBeamer{rounded}{\def\beamer@themeinner@rounded{#1}}
+\DeclareOptionBeamer{shadowed}{\def\beamer@themeinner@shadowed{#1}}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\useinnertheme{circles}
+\ifx\beamer@themeinner@rounded\beamer@themeinner@true
+\setbeamertemplate{blocks}[rounded][shadow=\beamer@themeinner@shadowed]
+\else
+\setbeamertemplate{blocks}[default]
+\fi
+\setbeamertemplate{title page}[default][%
+  colsep=-4bp,%
+  rounded=\beamer@themeinner@rounded,%
+  shadow=\beamer@themeinner@shadowed]
+\setbeamertemplate{part page}[default][%
+  colsep=-4bp,%
+  rounded=\beamer@themeinner@rounded,%
+  shadow=\beamer@themeinner@shadowed]
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{sections/subsections in toc}[circle]
+
+\mode<all>

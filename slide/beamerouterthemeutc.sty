@@ -1,0 +1,78 @@
+\def\beamer@themeouter@true{true}
+\def\beamer@themeouter@false{false}
+\def\beamer@themeouter@vertical{vertical}
+\def\beamer@themeouter@withsecplan{false}
+\def\beamer@themeouter@navigation{false}
+
+\DeclareOptionBeamer{navigation}{\def\beamer@themeouter@navigation{#1}}
+\DeclareOptionBeamer{withsecplan}{\def\beamer@themeouter@withsecplan{#1}}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+%%%
+% Entête
+%%%
+
+\setbeamertemplate{headline}{%
+  \hskip1cm
+  \begin{beamercolorbox}[center, wd=10.8cm, ht=0.05\paperheight]{structure}
+    \raisebox{4pt}{\logoutctext}
+    \rule{10.8cm}{.5pt}
+  \end{beamercolorbox}
+}
+\setbeamertemplate{frametitle}{%
+  \vskip-1pt
+  \begin{beamercolorbox}[center, wd=\textwidth, ht=0.1\paperheight]{structure}
+    \raisebox{-8pt}{\insertframetitle}
+    \rule{\textwidth}{1pt}
+  \end{beamercolorbox}
+}
+
+%%%
+% Ligne du bas =D
+%%%
+\setbeamertemplate{footline}{%
+  \hskip1cm
+  \begin{beamercolorbox}[wd=8.8cm,ht=.4cm]{inverted structure}%
+    \makebox[8.7cm][l]{%
+      \usebeamerfont{page number in head/foot}
+      \insertshorttitle{}
+      \ifx\insertsection\@empty
+      \relax
+      \else
+      ~\fg~\insertsection
+      \fi
+      \hfill
+      \insertframenumber{} / \inserttotalframenumber
+    }
+    \vskip2pt
+  \end{beamercolorbox}%
+  \makebox[2cm][r]{
+    \raisebox{-4pt}[0pt]{\logoutc{width=1.8cm}}}
+  \vskip4pt
+}
+
+% Fait afficher l'ensemble du frame
+% en peu lisible (gris clair) dès l'ouverture
+\beamertemplatetransparentcovered
+
+% Supprimer les icones de navigation (pour les transparents)
+\ifx\beamer@themeouter@navigation\beamer@themeouter@false
+  \setbeamertemplate{navigation symbols}{}
+\fi
+% Mettre les icones de navigation en mode vertical (pour projection)
+\ifx\beamer@themeouter@navigation\beamer@themeouter@vertical
+  \setbeamertemplate{navigation symbols}[vertical]
+\fi
+
+\ifx\beamer@themeouter@withsecplan\beamer@themeouter@true
+\AtBeginSection[]{
+  \begin{frame}<beamer>
+    \frametitle{Plan}
+    \tableofcontents[currentsection]%,currentsubsection]
+  \end{frame}
+}
+\fi
+
+\mode<all>

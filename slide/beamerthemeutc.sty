@@ -1,0 +1,142 @@
+% UTC beamer style
+
+\def\beamer@theme@true{true}
+\def\beamer@theme@false{false}
+\def\beamer@theme@withsecplan{false}
+\def\beamer@theme@navigation{false}
+\def\beamer@theme@utcrecherche{false}
+\def\beamer@theme@pinkie{false}
+\def\beamer@theme@rounded{true}
+\def\beamer@theme@shadowed{false}
+
+\DeclareOptionBeamer{navigation}{\def\beamer@theme@navigation{#1}}
+\DeclareOptionBeamer{withsecplan}{\def\beamer@theme@withsecplan{#1}}
+\DeclareOptionBeamer{utcrecherche}{\def\beamer@theme@utcrecherche{#1}}
+\DeclareOptionBeamer{pinkie}{\def\beamer@theme@pinkie{#1}}
+\DeclareOptionBeamer{rounded}{\def\beamer@theme@rounded{#1}}
+\DeclareOptionBeamer{shadowed}{\def\beamer@theme@shadowed{#1}}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\useoutertheme[navigation=\beamer@theme@navigation,withsecplan=\beamer@theme@withsecplan]{utc}
+\useinnertheme[rounded=\beamer@theme@rounded,shadowed=\beamer@theme@shadowed]{utc}
+
+\ifx\beamer@theme@pinkie\beamer@theme@true
+  \usecolortheme{utcpink}
+\else
+  \usecolortheme{utc}
+\fi
+
+\mode<all>
+
+\def\hilite<#1>{%
+  \temporal<#1>{\color{lightgray}}%
+  {\color{utcrose}}%
+  {\color{charcoal}}
+}
+
+\def\@email{}
+\def\email#1{\def\@email{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Définitions des variables et des macros pour les modifier pour la
+% page de titre. dans le texte, utiliser \wxxx pour ecrire xxx dans
+% le document
+% UV concernée
+\def\@uv{}
+\def\uv#1{\def\@uv{#1}}
+% Semestre concernée
+\def\@semestre{}
+\def\semestre#1{\def\@semestre{#1}}
+% Logo de l'utc
+\newcommand{\logoutc}[1]{%
+  \ifx\beamer@theme@utcrecherche\beamer@theme@true
+  \includegraphics[#1]{utc_recherche.pdf}
+  \else
+  \includegraphics[#1]{utc.png}
+  \fi
+}
+\newcommand{\logoutctext}{UNIVERSITÉ DE TECHNOLOGIE DE COMPIÈGNE}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\insertuvsemestre}{
+  \ifx\@uv\@empty
+    \relax
+  \else
+    \@uv
+    \ifx\@semestre\@empty
+      \\
+    \else
+      ~---
+    \fi
+  \fi
+  \ifx\@semestre\@empty
+    \relax
+  \else
+    \@semestre\\
+  \fi
+}
+
+\newcommand{\utctitlepage}{
+  \raisebox{-11pt}[0pt]{\logoutc{width=3cm}}
+  \usebeamercolor{inverted structure}
+  \begin{center}
+    \vfill
+    \Huge{\inserttitle}\\
+    \ifx\insertsubtitle\@empty
+    \relax
+    \else
+    \vspace{.3cm}
+    \Large{\insertsubtitle}\\
+    \fi
+    \vspace{.5cm}
+    \usebeamercolor[fg]{structure}
+    \large{\textit{\insertauthor}}\\
+    \usebeamercolor[fg]{inverted structure}
+    \begin{footnotesize}
+      \vspace{.5cm}
+      \ifx\insertinstitute\@empty
+        \relax
+      \else
+        \insertinstitute\\
+      \fi
+      \insertuvsemestre
+      \insertdate
+    \end{footnotesize}
+    \vfill
+  \end{center}
+}
+
+\newcommand{\utcthankspage}[1][Thanks]{
+  \raisebox{-11pt}[0pt]{\logoutc{width=3cm}}
+  \usebeamercolor{inverted structure}
+  \begin{center}
+    \vfill
+    \Huge{#1}\\
+    \vspace{.5cm}
+    \usebeamercolor[fg]{structure}
+    \Large{\textit{\insertauthor}}\\
+    \usebeamercolor[fg]{inverted structure}
+    \ifx\@email\@empty
+      \relax
+    \else
+      \vspace{.3cm}
+      \large{\@email}\\
+    \fi
+    \vspace{.5cm}
+    \begin{footnotesize}
+      \inserttitle
+      \ifx\insertsubtitle\@empty
+        \relax
+      \else
+        ~---~\insertsubtitle
+      \fi\\
+      \vspace{.5cm}
+      \insertuvsemestre
+      \insertdate
+    \end{footnotesize}
+    \vfill
+  \end{center}
+}
