@@ -6,11 +6,13 @@
 %\RequirePackage[T1]{fontenc}
 
 %font (commenter pour pdflatex, décommenter pour xelatex)
-\RequirePackage{fontspec}
+\RequirePackage{xltxtra}
 \defaultfontfeatures{Scale=MatchLowercase}
-\setmonofont[Mapping=tex-text,Scale=0.8, Numbers=SlashedZero]{DejaVuSansMono}
-\setromanfont[Mapping=tex-text, Numbers=Proportional, Numbers=OldStyle]{Linux Libertine O}
-\setsansfont[Mapping=tex-text, Numbers=Monospaced]{Linux Biolinum O}
+%\setromanfont[Mapping=tex-text]{DejaVuSerif}
+%\setsansfont[Mapping=tex-text]{DejaVuSans}
+\setmonofont[Mapping=tex-text,Scale=0.8]{DejaVuSansMono}
+\setromanfont[Mapping=tex-text]{Linux Libertine O}
+\setsansfont[Mapping=tex-text]{Linux Biolinum O}
 
 \RequirePackage{geometry}
 % pour l'impression taille A4
@@ -40,16 +42,18 @@
 %\newlength{\decallagetitre}
 %\setlength{\decallagetitre}{5mm}
 %\headheight 20.6pt % en cas de titre long
-% pour les nouvelles commandes (espace à la fin)
-\RequirePackage{xspace}
+
+
 %Selection de la langue du document
 \RequirePackage[english,frenchb]{babel}
-\RequirePackage[babel,english=american,french=guillemets*]{csquotes}
+\RequirePackage[autostyle=true,english=american,french=guillemets]{csquotes}
 \MakeOuterQuote{"}
 \linespread{1.4}
 \frenchspacing
 \widowpenalty=300
 \clubpenalty=300
+
+
 % pour avoir des couleurs
 %\RequirePackage[usenames,dvipsnames]{color}
 \RequirePackage[table,usenames,dvipsnames]{xcolor}
@@ -71,38 +75,48 @@
 \definecolor{thalesorange}{RGB}{255,115,0}
 \definecolor{thalesgreen}{RGB}{152,191,12}
 
+
 % configuration de la transformation en PDF
 \RequirePackage{hyperref}
 \hypersetup{
   colorlinks=false,
-  pdfborder={0 0 0 0},
+  pdfborder=0 0 0,
   breaklinks=true,
-  bookmarks=true,
   bookmarksopen=true,
-  pdfcreator={LaTeX},
-  pdfproducer={LaTeX with package UTClatex}
-}
+  pdfcreator=LaTeX,
+  pdfproducer=LaTeX with package UTClatex}
+
+
+% pour les nouvelles commandes (espace à la fin)
+\RequirePackage{xspace}
+
 % pour gérer l'insertion de figures
 \RequirePackage{graphicx}
 \RequirePackage{caption}
+\RequirePackage{subfigure}
+\RequirePackage{wrapfig}
+
 % pour pouvoir inserer des url en bleu sans serif
 \RequirePackage{url}
 \urlstyle{sf}
-% Pour différents types de tableaux
+
+% pour différents types de tableaux
 \RequirePackage{multirow}
 \RequirePackage{tabularx}
 \RequirePackage{array}
 \RequirePackage{colortbl}
 \RequirePackage{ltxtable}
-\RequirePackage{subfigure}
-\RequirePackage{wrapfig}
+
 % pour les entetes et pieds de page
 \RequirePackage{fancyhdr}
 \RequirePackage{lettrine}
-% Pour des jolis codes sources
+
+% pour des jolis codes sources
 \RequirePackage[final]{listings}
+
 \RequirePackage{eurosym}
 \RequirePackage{acronym}
+
 \RequirePackage{pifont} % Dingbats font (useful for custom itemize)
 \RequirePackage{natbib}
 
@@ -113,7 +127,7 @@
 \def\licencechoice#1{\def\@licencechoice{#1}}
 
 \pagestyle{fancy}
-\fancyhf{}               %initialise tous les champs dans head et foot
+\fancyhf{}                        % initialise tous les champs dans head et foot
 \renewcommand{\headrulewidth}{0pt}% met la largeur du trait à 0.2pt
 \renewcommand{\footrulewidth}{0pt}%
 
@@ -272,3 +286,5 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\endinput

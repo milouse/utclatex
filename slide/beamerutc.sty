@@ -3,13 +3,6 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
 
-%Selection de la langue du document
-\RequirePackage[frenchb]{babel}
-\RequirePackage[babel,french=guillemets*]{csquotes}
-\RequirePackage{eurosym}
-\RequirePackage{acronym}
-\MakeOuterQuote{"}
-\frenchspacing
 
 % configuration de la transformation en PDF
 \RequirePackage{hyperref}
@@ -18,25 +11,40 @@
   pdfborder=0 0 0,
   breaklinks=true,
   bookmarksopen=true,
-  pdfcreator={LaTeX},
-  pdfproducer={LaTeX with package BeamerUTC}
-}
+  pdfcreator=LaTeX,
+  pdfproducer=LaTeX with package BeamerUTC}
 \pdfoutput=1
 \pdfcompresslevel=9
+
+
+% selection de la langue du document
+\RequirePackage[frenchb]{babel}
+\RequirePackage[babel,french=guillemets]{csquotes}
+\MakeOuterQuote{"}
+\frenchspacing
+
+
 % pour gérer l'insertion de figures
 \RequirePackage{graphicx}
 \RequirePackage{caption}
 \RequirePackage{pifont} % des pictos
 \RequirePackage{wasysym} % des smileys
+
 % pour pouvoir inserer des url en bleu sans serif
 \RequirePackage{url}
 \urlstyle{sf}
 \newcommand\urlcolor[1]{\textcolor{blue}{\url{#1}}}
+
 \newcommand{\Num}[1]{\oldstylenums{#1}}
-% Pour différents types de tableaux
+
+% pour différents types de tableaux
 \RequirePackage{multirow}
 \RequirePackage{tabularx}
 \RequirePackage{array}
 \RequirePackage{colortbl}
-% Pour des jolis codes sources
+
+% pour des jolis codes sources
 \RequirePackage[final]{listings}
+
+\RequirePackage{eurosym}
+\RequirePackage{acronym}
