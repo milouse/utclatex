@@ -1,11 +1,46 @@
 \ProvidesPackage{articleutc}
 
+\newlength{\decallagetitre}
+% pour l'impression taille A4
+\DeclareOption{a4book}{%
+  \PassOptionsToPackage{%
+    a4paper,
+    top=2.5cm,
+    bottom=2cm,
+    left=3cm,
+    right=2cm,
+    asymmetric,
+    marginparwidth=1.2cm
+  }{geometry}%
+  \linespread{1.4}%
+  \setlength{\decallagetitre}{1cm}}
+
+% pour le format ebook
+\DeclareOption{pocketbook}{%
+  \PassOptionsToPackage{%
+    paperwidth=80mm,
+    paperheight=104mm,
+    top=3mm,
+    bottom=3mm,
+    includeheadfoot,
+    asymmetric,
+    left=1cm,
+    right=3mm,
+    marginparwidth=1.2cm
+  }{geometry}%
+  \linespread{1.4}%
+  \setlength{\decallagetitre}{5mm}}
+
+\ProcessOptions
+
+\RequirePackage{geometry}
+
 % pour les polices accentuées francaises (avec pdfTeX)
 % décommenter pour pdflatex, commenter pour xelatex
 %\RequirePackage[utf8]{inputenc}
 %\RequirePackage[T1]{fontenc}
 
-%font (commenter pour pdflatex, décommenter pour xelatex)
+% font (commenter pour pdflatex, décommenter pour xelatex)
 \RequirePackage{xltxtra}
 \defaultfontfeatures{Scale=MatchLowercase}
 %\setromanfont[Mapping=tex-text]{DejaVuSerif}
@@ -14,41 +49,11 @@
 \setromanfont[Mapping=tex-text]{Linux Libertine O}
 \setsansfont[Mapping=tex-text]{Linux Biolinum O}
 
-\RequirePackage{geometry}
-% pour l'impression taille A4
-\geometry{
-	%a4paper, % définit dans l'entête du fichier
-	top=2.5cm,
-	bottom=2cm,
-	left=3cm,
-	right=2cm,
-	asymmetric,
-	marginparwidth=1.2cm
-}
-\newlength{\decallagetitre}
-\setlength{\decallagetitre}{1cm}
-% pour l'affichage en e-reader
-%\geometry{
-%	paperwidth=80mm,
-%	paperheight=104mm,
-%	top=3mm,
-%	bottom=3mm,
-%	includeheadfoot,
-%	asymmetric,
-%	left=1cm,
-%	right=3mm,
-%	marginparwidth=1.2cm
-%}
-%\newlength{\decallagetitre}
-%\setlength{\decallagetitre}{5mm}
-%\headheight 20.6pt % en cas de titre long
-
 
 %Selection de la langue du document
 \RequirePackage[english,frenchb]{babel}
 \RequirePackage[autostyle=true,english=american,french=guillemets]{csquotes}
 \MakeOuterQuote{"}
-\linespread{1.4}
 \frenchspacing
 \widowpenalty=300
 \clubpenalty=300
@@ -120,7 +125,41 @@
 \RequirePackage{pifont} % Dingbats font (useful for custom itemize)
 \RequirePackage{natbib}
 
-%%%%%%%Définition des entetes et pieds de page%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Définitions des variables et des macros pour les modifier pour la
+% page de titre. dans le texte, utiliser \wxxx pour ecrire xxx dans
+% le document
+
+% UV concernée
+\def\@uv{Non renseigné~!}
+\def\uv#1{\def\@uv{#1}}
+
+% Semestre concernée
+\def\@semestre{Non renseigné~!}
+\def\semestre#1{\def\@semestre{#1}}
+
+% Branche concernée
+\def\@branche{Non renseigné~!}
+\def\branche#1{\def\@branche{#1}}
+
+% Filière ou master, ou spécialité concernée
+\def\@filiere{~}
+\def\filiere#1{\def\@filiere{#1}}
+
+% Filière ou master, ou spécialité concernée, deuxième ligne
+\def\@specialite{~}
+\def\specialite#1{\def\@specialite{#1}}
+
+% Logo de l'utc
+\newcommand{\logoutc}[1]{\includegraphics[#1]{img/utc.png}}
+
+\newcommand{\logoutctext}{
+  \textsc{\large Université de Technologie de Compiègne}
+}
+
+
+%%%%%%% Définition des entetes et pieds de page %%%%%%%%%%
 
 % Choix de la licence du document. Par défaut CC by sa
 \def\@licencechoice{\includegraphics[width=1.1cm]{img/bysafr.png}~}
@@ -129,27 +168,55 @@
 \pagestyle{fancy}
 \fancyhf{}                        % initialise tous les champs dans head et foot
 \renewcommand{\headrulewidth}{0pt}% met la largeur du trait à 0.2pt
-\renewcommand{\footrulewidth}{0pt}%
+\renewcommand{\footrulewidth}{5pt}%
+\renewcommand{\footrule}{%
+  {\color{jauneutc}%
+    \hrule width\headwidth height\footrulewidth \vskip+\footrulewidth}
+}
 
-\fancyhead[RO,LE]{\footnotesize{\textit{\@title}}}
-\fancyfoot[RE,LO]{\footnotesize{\textit{\@author}}}
-\fancyfoot[RO,LE]{\footnotesize{\textit{\@licencechoice}}}
-\fancyheadoffset[L]{\decallagetitre}
-\fancyfootoffset[L]{\decallagetitre}
+\fancyhead[R]{}
+\fancyhead[L]{\logoutc{height=0.75cm}}
+\fancyfoot[R]{\footnotesize{\textit{\@title}}}
 \fancyfoot[C]{\thepage}
+\fancyfoot[R]{\footnotesize{\textit{\@title}}}
+\fancyfoot[L]{\footnotesize{\textit{\@author~---~\@uv\\\@licencechoice}}}
+
 
 %%%%%%% Mes commandes %%%%%%%%
 \newcommand\urlcolor[1]{\textcolor{thalessubtitle}{\url{#1}}}
+
 \newcommand{\Num}[1]{\oldstylenums{#1}}
+
 \newcommand{\cf}[1]{(\emph{cf.} section \ref{#1}, \og\nameref{#1}\fg, %
   p. \pageref{#1})}
+
 \newcommand{\cfnop}[1]{\emph{cf.} section \ref{#1}, \og\nameref{#1}\fg, %
   p. \pageref{#1}}
+
 \newcommand{\cfnocf}[1]{(section \ref{#1}, \og\nameref{#1}\fg, %
   p. \pageref{#1})}
+
 \newcommand{\cfnopnocf}[1]{section \ref{#1}, \og\nameref{#1}\fg, %
   p. \pageref{#1}}
+
+\newcommand{\cita}[1]{\og\emph{#1}\fg}
+
+\newcommand{\bcode}[1]{
+  \begin{codebox}
+    \textcolor{fboxcodecolor}{\texttt{#1}}
+  \end{codebox}
+}
+\newcommand{\bdef}[1]{
+  \begin{defbox}
+    \textcolor{fboxdefcolor}{\textit{#1}}
+  \end{defbox}
+}
+\newcommand{\onto}[1]{%
+  \fcolorbox{fboxcodecolor}{boxcodecolor}{#1}
+}
+
 \newcommand{\aster}{\ding{93}}
+
 \newcommand\asterism{
   \begin{center}
     \vspace{-1em}
@@ -163,6 +230,32 @@
   \end{center}
 }
 
+\RequirePackage{datetime}
+\newcommand{\colophon}[1]{
+  ~\vfill
+  \begin{center}
+    \small #1\\
+    \scriptsize version du \today{} --- \currenttime
+  \end{center}
+  \cleardoublepage
+}
+
+\newcommand{\titrearticle}{
+  \begin{center}
+    \vfill
+    \Huge \@title \\
+    \vspace{1cm}
+    \large \textit{\@author}\\
+    \large{\@date}\\
+    \normalsize{\@uv~---~\@semestre}
+    \vspace{1cm}
+  \end{center}
+}
+
+
+%\renewcommand{\acsfont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
+%\renewcommand{\acffont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
+%\renewcommand{\acfsfont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
 
 \renewcommand\section{\@startsection {section}{1}{-1\decallagetitre}%
   {-3.5ex \@plus -1ex \@minus -.2ex}%
@@ -176,10 +269,6 @@
   {-3.25ex\@plus -1ex \@minus -.2ex}%
   {1.5ex \@plus .2ex}%
   {\normalfont\normalsize\bfseries}}
-
-% \renewcommand{\acsfont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
-% \renewcommand{\acffont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
-% \renewcommand{\acfsfont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
 
 
 \RequirePackage{framed}
@@ -207,84 +296,5 @@
   \MakeFramed{\FrameRestore}%
 }%
 {\endMakeFramed}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Définitions des variables et des macros pour les modifier pour la
-% page de titre. dans le texte, utiliser \wxxx pour ecrire xxx dans
-% le document
-% UV concernée
-\def\@uv{Non renseigné~!}
-\def\uv#1{\def\@uv{#1}}
-% Semestre concernée
-\def\@semestre{Non renseigné~!}
-\def\semestre#1{\def\@semestre{#1}}
-% Branche concernée
-\def\@branche{Non renseigné~!}
-\def\branche#1{\def\@branche{#1}}
-% Filière ou master, ou spécialité concernée
-\def\@filiere{~}
-\def\filiere#1{\def\@filiere{#1}}
-% Filière ou master, ou spécialité concernée, deuxième ligne
-\def\@specialite{~}
-\def\specialite#1{\def\@specialite{#1}}
-% Logo de l'utc
-\newcommand{\logoutc}[1]{\includegraphics[#1]{img/utc.png}}
-\newcommand{\logoutctext}{
-  \textsc{\large Université de Technologie de Compiègne}
-}
-
-\newcommand{\cita}[1]{\og\emph{#1}\fg}
-
-\newcommand{\bcode}[1]{
-  \begin{codebox}
-    \textcolor{fboxcodecolor}{\texttt{#1}}
-  \end{codebox}
-}
-\newcommand{\bdef}[1]{
-  \begin{defbox}
-    \textcolor{fboxdefcolor}{\textit{#1}}
-  \end{defbox}
-}
-\newcommand{\onto}[1]{%
-  \fcolorbox{fboxcodecolor}{boxcodecolor}{#1}
-}
-
-%%%%%%%Définition des entetes et pieds de page%%%%%%%%%%
-
-\pagestyle{fancy}
-\fancyhf{}               %initialise tous les champs dans head et foot
-\renewcommand{\headrulewidth}{0pt}% met la largeur du trait à 0.2pt
-\renewcommand{\footrulewidth}{5pt}%
-\renewcommand{\footrule}{%
-  {\color{jauneutc}%
-    \hrule width\headwidth height\footrulewidth \vskip+\footrulewidth}
-}
-
-\fancyhead[R]{}
-\fancyhead[L]{\logoutc{height=0.75cm}}
-\fancyfoot[R]{\footnotesize{\textit{\@title}}}
-\fancyfoot[C]{\thepage}
-\fancyfoot[R]{\footnotesize{\textit{\@title}}}
-\fancyfoot[L]{\footnotesize{\textit{\@author~---~\@uv\\\@licencechoice}}}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Macros
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Création de la page de titre
-
-\newcommand{\titrearticle}{
-  \begin{center}
-    \vfill
-    \Huge \@title \\
-    \vspace{1cm}
-    \large \textit{\@author}\\
-    \large{\@date}\\
-    \normalsize{\@uv~---~\@semestre}
-    \vspace{1cm}
-  \end{center}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \endinput

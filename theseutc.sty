@@ -168,16 +168,6 @@
     \end{flushright}}
 }
 
-\RequirePackage{datetime} % no native solution ? :-(
-\newcommand{\colophon}[1]{
-  ~\vfill
-  \begin{center}
-    \small #1\\
-    \scriptsize version du \today{} --- \currenttime
-  \end{center}
-  \cleardoublepage
-}
-
 \makeatletter
 \def\@part[#1]#2#3{
   \ifnum \c@secnumdepth >-2\relax \refstepcounter{part}
