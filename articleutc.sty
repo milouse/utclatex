@@ -65,8 +65,8 @@
 \definecolor{orange}{RGB}{250,108,0}
 \definecolor{darkgreen}{RGB}{155,187,89}
 \definecolor{lightgreen}{RGB}{239,243,234}
-\definecolor{atosred}{RGB}{204,0,0}
-\definecolor{tatoebagreen}{RGB}{100,155,61}
+\definecolor{othergreen}{RGB}{100,155,61}
+\definecolor{darkred}{RGB}{204,0,0}
 \definecolor{charcoal}{RGB}{28,28,28}
 \definecolor{jauneutc}{RGB}{255,217,17}
 \definecolor{grayutc}{RGB}{117,115,120}
@@ -74,11 +74,6 @@
 \definecolor{fboxcodecolor}{RGB}{183,146,20}
 \definecolor{boxdefcolor}{RGB}{229,235,242}
 \definecolor{fboxdefcolor}{RGB}{52,77,108}
-\definecolor{fboxatoscolor}{RGB}{255,133,133}
-\definecolor{thalestitle}{RGB}{50,50,101}
-\definecolor{thalessubtitle}{RGB}{57,138,199}
-\definecolor{thalesorange}{RGB}{255,115,0}
-\definecolor{thalesgreen}{RGB}{152,191,12}
 
 
 % configuration de la transformation en PDF
@@ -252,11 +247,6 @@
   \end{center}
 }
 
-
-%\renewcommand{\acsfont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
-%\renewcommand{\acffont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
-%\renewcommand{\acfsfont}[1]{\textcolor{tatoebagreen}{\textsf{#1}}}
-
 \renewcommand\section{\@startsection {section}{1}{-1\decallagetitre}%
   {-3.5ex \@plus -1ex \@minus -.2ex}%
   {2.3ex \@plus.2ex}%
@@ -286,14 +276,6 @@
   }%
   \MakeFramed{\FrameRestore}%
   \noindent\ignorespaces
-}%
-{\endMakeFramed}
-
-\newenvironment{atosbox}{%
-  \def\FrameCommand{%
-    \fboxsep=\FrameSep \fcolorbox{atosred}{fboxatoscolor}%
-  }%
-  \MakeFramed{\FrameRestore}%
 }%
 {\endMakeFramed}
 
