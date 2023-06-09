@@ -1,4 +1,6 @@
-\ProvidesPackage{rapportutc}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{rapportutc}[2023/05/26]
+
 \RequirePackage{articleutc}
 
 %%%%%%% Définition des entetes et pieds de page %%%%%%%%%%
@@ -21,7 +23,7 @@
   \vspace*{-0.1in}%
   \logoutc{height=0.75cm}%
 }
-\fancyfoot[L]{\footnotesize{\textit{\@author\\ \@uv}}}
+\fancyfoot[L]{\footnotesize{\textit{\@author\\\@uv}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macros
@@ -53,11 +55,11 @@
       \vfill
       \rule{\linewidth}{0.8mm}\vspace{3mm}\\
       \setlength{\baselineskip}{1.5\baselineskip}
-      \Huge \@title\\
+      {\Huge\@title}\\
       \setlength{\baselineskip}{0.67\baselineskip}
       {\rule{\linewidth}{0.8mm}}
       \vspace{3mm}\\
-      \large \textit{\@author}
+      {\large\textit{\@author}}
       \vfill
       \normalsize{---~\@semestre~---}
     \end{center}
@@ -81,7 +83,7 @@
       \vspace{4cm}
       {\color{jauneutc}\rule{\linewidth}{0.8mm}}\vspace{3mm}\\
       \setlength{\baselineskip}{1.5\baselineskip}
-      \Huge \textsc{\@title}\\
+      {\Huge\textsc{\@title}}\\
       \setlength{\baselineskip}{0.67\baselineskip}
       {\color{jauneutc}\rule{\linewidth}{0.8mm}}
       \vfill
@@ -118,7 +120,7 @@
       \vspace{4cm}
       {\color{jauneutc}\rule{\linewidth}{0.8mm}}\vspace{3mm}\\
       \setlength{\baselineskip}{1.5\baselineskip}
-      \Huge \textsc{\@title}\\
+      {\Huge\textsc{\@title}}\\
       \setlength{\baselineskip}{0.67\baselineskip}
       {\color{jauneutc}\rule{\linewidth}{0.8mm}}
       \vfill
@@ -134,7 +136,6 @@
   \end{titlepage}
 }
 
-\makeatletter
 \def\@part[#1]#2#3{
   \ifnum \c@secnumdepth >-2\relax \refstepcounter{part}
   \addcontentsline{toc}{part}{\thepart \hspace{1em} #1}
@@ -145,10 +146,10 @@
     \centering \vfill
     \interlinepenalty \@M \normalfont
     \ifnum \c@secnumdepth >-2\relax
-    \textcolor{charcoal}{\Huge\bfseries \partname ~\thepart}
+    \textcolor{charcoal}{\Huge\bfseries\partname~\thepart}
     \par \vskip 20\p@
     \fi
-    \textcolor{othergreen}{\Huge \bfseries #2}
+    \textcolor{othergreen}{\Huge\bfseries#2}
     \par
   }
   {\vspace{2cm} #3 \vfill}
@@ -159,9 +160,9 @@
   {
     \parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
-      \Huge\bfseries \thechapter.~
+      \Huge\bfseries\thechapter.~
     \fi
-    \textcolor{charcoal}{\Huge\bfseries #1}
+    \textcolor{charcoal}{\Huge\bfseries#1}
     \par\nobreak
     \vskip 40\p@
   }
@@ -173,7 +174,7 @@
     \parindent \z@ \raggedright
     \normalfont
     \interlinepenalty\@M
-    \textcolor{charcoal}{\Huge \bfseries  #1}
+    \textcolor{charcoal}{\Huge\bfseries#1}
     \par\nobreak
     \vskip 40\p@
   }
@@ -195,4 +196,5 @@
   {-1em}%
   {\normalfont\normalsize\bfseries\color{charcoal!60}}%
 }
-\makeatother
+
+\endinput

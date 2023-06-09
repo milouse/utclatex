@@ -1,4 +1,5 @@
-\ProvidesPackage{articleutc}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{articleutc}[2023/05/26]
 
 \newlength{\decallagetitre}
 % pour l'impression taille A4
@@ -42,12 +43,10 @@
 
 % font (commenter pour pdflatex, décommenter pour xelatex)
 \RequirePackage{xltxtra}
-\defaultfontfeatures{Scale=MatchLowercase}
-%\setromanfont[Mapping=tex-text]{DejaVuSerif}
-%\setsansfont[Mapping=tex-text]{DejaVuSans}
-\setmonofont[Mapping=tex-text,Scale=0.8]{DejaVuSansMono}
-\setromanfont[Mapping=tex-text]{Linux Libertine O}
-\setsansfont[Mapping=tex-text]{Linux Biolinum O}
+\defaultfontfeatures{Scale=MatchLowercase, Ligatures=TeX}
+\setmainfont{Libertinus Serif}
+\setsansfont{Libertinus Sans}
+\setmonofont{DejaVu Sans Mono}[Scale=0.8, Ligatures=TeXReset]
 
 
 %Selection de la langue du document
@@ -55,9 +54,6 @@
 \RequirePackage[autostyle=true,english=american,french=guillemets]{csquotes}
 \MakeOuterQuote{"}
 \frenchspacing
-\widowpenalty=300
-\clubpenalty=300
-
 
 % pour avoir des couleurs
 %\RequirePackage[usenames,dvipsnames]{color}
@@ -80,11 +76,18 @@
 \RequirePackage{hyperref}
 \hypersetup{
   colorlinks=false,
-  pdfborder=0 0 0,
+  pdfborder={0 0 0},
   breaklinks=true,
   bookmarksopen=true,
-  pdfcreator=LaTeX,
-  pdfproducer=LaTeX with package UTClatex}
+  pdfproducer={LaTeX with package UTClatex}
+}
+\AtBeginDocument{
+  \hypersetup{
+    pdftitle={\@title},
+    pdfauthor={\@author}
+  }
+}
+
 
 
 % pour les nouvelles commandes (espace à la fin)
@@ -149,9 +152,7 @@
 % Logo de l'utc
 \newcommand{\logoutc}[1]{\includegraphics[#1]{img/utc.png}}
 
-\newcommand{\logoutctext}{
-  \textsc{\large Université de Technologie de Compiègne}
-}
+\newcommand{\logoutctext}{{\large\textsc{Université de Technologie de Compiègne}}}
 
 
 %%%%%%% Définition des entetes et pieds de page %%%%%%%%%%
@@ -162,6 +163,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}                        % initialise tous les champs dans head et foot
+
 \renewcommand{\headrulewidth}{0pt}% met la largeur du trait à 0.2pt
 \renewcommand{\footrulewidth}{5pt}%
 \renewcommand{\footrule}{%
@@ -169,12 +171,12 @@
     \hrule width\headwidth height\footrulewidth \vskip+\footrulewidth}
 }
 
-\fancyhead[R]{}
 \fancyhead[L]{\logoutc{height=0.75cm}}
-\fancyfoot[R]{\footnotesize{\textit{\@title}}}
+\fancyhead[R]{}
+
+\fancyfoot[L]{\footnotesize{\textit{\@author~---~\@uv\\\@licencechoice}}}
 \fancyfoot[C]{\thepage}
 \fancyfoot[R]{\footnotesize{\textit{\@title}}}
-\fancyfoot[L]{\footnotesize{\textit{\@author~---~\@uv\\\@licencechoice}}}
 
 
 %%%%%%% Mes commandes %%%%%%%%
@@ -229,8 +231,8 @@
 \newcommand{\colophon}[1]{
   ~\vfill
   \begin{center}
-    \small #1\\
-    \scriptsize version du \today{} --- \currenttime
+    \smallsize{#1}\\
+    \scriptsize{version du \today{} --- \currenttime}
   \end{center}
   \cleardoublepage
 }
@@ -238,10 +240,9 @@
 \newcommand{\titrearticle}{
   \begin{center}
     \vfill
-    \Huge \@title \\
+    {\Huge\@title}\\
     \vspace{1cm}
-    \large \textit{\@author}\\
-    \large{\@date}\\
+    {\large\textit{\@author}\\\@date}\\
     \normalsize{\@uv~---~\@semestre}
     \vspace{1cm}
   \end{center}

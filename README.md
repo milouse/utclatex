@@ -41,9 +41,9 @@ xelatex est la possibilité d’utiliser les polices de caractères
 installées sur le système, en lieu et place des polices par défaut de
 latex.
 
-Si vous souhaitez utiliser d’autres polices que celles proposées (Linux
-Libertine, Linux Biolinum et DejaVu Sans Mono), rendez-vous dans le
-fichier `articleutc.sty` et modifiez les lignes 48 à 50 à votre guise.
+Si vous souhaitez utiliser d’autres polices que celles proposées (Libertinus
+Serif, Libertinus Sans et DejaVu Sans Mono), rendez-vous dans le fichier
+`articleutc.sty` et modifiez les lignes 48 à 50 à votre guise.
 
 Si vous souhaitez utiliser pdflatex plutôt que xelatex, vous devez
 simplement modifier le fichier `articleutc.sty` : décommentez les lignes

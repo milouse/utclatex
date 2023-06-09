@@ -1,4 +1,6 @@
-\ProvidesPackage{theseutc}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{theseutc}[2023/05/26]
+
 \RequirePackage{articleutc}
 
 %% L'ensemble de ce paquet est inspiré des travaux de Julien Chiquet
@@ -168,7 +170,6 @@
     \end{flushright}}
 }
 
-\makeatletter
 \def\@part[#1]#2#3{
   \ifnum \c@secnumdepth >-2\relax \refstepcounter{part}
   \addcontentsline{toc}{part}{\thepart \hspace{1em} #1}
@@ -229,4 +230,5 @@
   {-1em}%
   {\normalfont\normalsize\bfseries\color{charcoal!60}}%
 }
-\makeatother
+
+\endinput
